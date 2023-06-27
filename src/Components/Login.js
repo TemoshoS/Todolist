@@ -1,5 +1,3 @@
-import username from './images/user.png'
-import password from './images/password.png'
 import { useState } from 'react'
 import Home from './Home'
 import { Link } from 'react-router-dom'
@@ -43,27 +41,29 @@ const Login = () => {
                 <div className="login-card">
                     <h2 className="heading">Login</h2>
                     <form onSubmit={handleLogin}>
-                        <div className="label">
 
-                            <label ><img src={username} style={{ width: 15 }} /></label>
-                            <input onChange={e => setEmaillog(e.target.value)} className="input-login" placeholder="Username" />
+                        <div className="input-container">
+                            
+                            <input type='text' required='' onChange={e => setEmaillog(e.target.value)} />
+                            <label >Username</label>
                         </div>
 
 
-                        <div>
-                            <label ><img src={password} style={{ width: 15 }} /></label>
-                            <input onChange={e => setPasswordlog(e.target.value)} className="input-login" placeholder="Password" />
+                        <div  className="input-container">
+                            
+                            <input onChange={e => setPasswordlog(e.target.value)}/>
+                            <label >Password</label>
                         </div>
 
-                        <button type='number'  >LOGIN</button>
+                        <button type='number' className='login-button' >LOGIN</button>
                         {flag && (
-                            <h3>Please type in your login details</h3>
+                            <h5 style={{color:'red'}}>Please enter valid details</h5>
            
                          )}
 
                     </form>
 
-                    <Link to='/register'>sign up</Link>
+                    <Link to='/register' className='link-signup'>sign up</Link>
                 </div>
             ) : (
                 <Home />

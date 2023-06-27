@@ -40,54 +40,54 @@ const Register = () => {
         <div>
 {" "}
                 {login ? (
-            <div className="sign-card">
+            <div className="login-card">
                 <h2 className="heading">Sign up</h2>
                 
 
                     <form onSubmit={handleSubmit}>
 
-                        <div className="label">
+                        <div className="input-container">
 
                             <label >ID</label> <br />
-                            <input value={id} onChange={e => setId(e.target.value)} className="input-login" placeholder="enter your id" />
+                            <input value={id} onChange={e => setId(e.target.value)} />
                         </div>
 
 
-                        <div>
+                        <div className="input-container">
                             <label >Name and Surname</label> <br />
-                            <input value={name} onChange={e => setName(e.target.value)} className="input-login" placeholder="enter your name" />
+                            <input value={name} onChange={e => setName(e.target.value)} />
                         </div>
 
-                        <div>
+                        <div className="input-container">
                             <label >Email</label> <br />
-                            <input value={email} onChange={e => setEmail(e.target.value)} className="input-login" placeholder="enter your email" />
+                            <input value={email} onChange={e => setEmail(e.target.value)}  />
                         </div>
 
 
-                        <div>
+                        <div className="input-container">
                             <label >Phone</label> <br />
-                            <input value={phone} onChange={e => setPhone(e.target.value)} className="input-login" placeholder="enter your phone" />
+                            <input value={phone} onChange={e => setPhone(e.target.value)}  />
                         </div>
 
-                        <div>
+                        <div className="input-container">
                             <label >Positon</label> <br />
-                            <input value={position} onChange={e => setPosition(e.target.value)} className="input-login" placeholder="enter your phone" />
+                            <input value={position} onChange={e => setPosition(e.target.value)}  />
                         </div>
 
 
-                        <div>
+                        <div className="input-container">
                             <label >Password</label> <br />
-                            <input value={password} onChange={e => setPassword(e.target.value)} className="input-login" placeholder="enter your positon" />
+                            <input value={password} onChange={e => setPassword(e.target.value)}  />
                         </div>
 
 
                         <button className="sign-button" >Register</button>
 
-                        <p onClick={handleClick}>already registered {" "} log in</p>
+                        <p onClick={handleClick}>already registered ? <c style={{color:'#0000EE'}}>login</c></p>
 
 
                         {flag && (
-                            <h1>please</h1>
+                            <h1 style={{color:'red'}}>Please enter your details</h1>
                         )}
 
                     </form>
