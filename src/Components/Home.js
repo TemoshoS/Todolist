@@ -33,6 +33,10 @@ const Home = () => {
   const [data, setData] = useState([]);
   const [task, setTask] = useState(users)
   const [updateState, setUpdateState] = useState(-1)
+  
+
+
+  
 
 
 
@@ -47,17 +51,33 @@ const Home = () => {
 
 
   //add new task
+
+  
   const add = (event) => {
     event.preventDefault()
 
+    if (name && priority) {
+      let color = '';
+      if (priority === 'High') {
+        color = 'red';
+      } else if (priority === 'Medium') {
+        color = 'yellow';
+      } else if (priority === 'Low') {
+        color = 'green';
+        
+      }
+
+    
     const id = counter + 1;
     const date = new Date().toLocaleDateString();
-    const newTask = { id, name: name, date, priority: priority };
+    const newTask = { id, name: name, date, priority: priority,color: color  };
     const updateTask = [...task, newTask];
+    
 
     setCounter(counter + 1)
     setTask(updateTask)
     setUpdateState(-1)
+    }
   }
 
   //update task
@@ -131,12 +151,12 @@ const Home = () => {
 
             <select value={priority} onChange={e => setPriority(e.target.value)}>
               <option>Select</option>
-              <option value='high' >High</option>
-              <option value='medium'>Medium</option>
-              <option value='low'>Low</option>
+              <option value='High' >High</option>
+              <option value='Medium'>Medium</option>
+              <option value='Low'>Low</option>
             </select>
 
-            <input required type="text" placeholder="Name" value={name} onChange={e => setName(e.target.value)} />
+            <input required type="text" placeholder="Name" value={name} onChange={e => setName(e.target.value)}  />
             <button type="submit"><i className='fa fa-plus'></i></button>
           </div>
         </form>
@@ -159,7 +179,7 @@ const Home = () => {
 
               <tr>
                 <td>{item.id}</td>
-                <td>{item.name}</td>
+                <td style={{ color: item.color }}>{item.name}</td>
                 <td>{item.date}</td>
                 <td>{item.priority}</td>
                 <td><button className='edit-button' onClick={() => handleEdit(item.id)}><i className='fa fa-edit fa-2x'></i></button></td>
