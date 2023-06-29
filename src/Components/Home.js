@@ -25,10 +25,14 @@ const Home = () => {
 
   const [search, setSearch] = useState('');
   const [name, setName] = useState('');
+  const [priority, setPriority] = useState('');
   const [counter, setCounter] = useState(3);
-
   const [data, setData] = useState([]);
+  const [task, setTask] = useState(users)
+  const [updateState, setUpdateState] = useState(-1)
 
+
+  
   useEffect(() => {
     const info = localStorage.getItem('Name');
     const parsedInfo = JSON.parse(info);
@@ -37,10 +41,9 @@ const Home = () => {
 
 
 
-  const [task, setTask] = useState(users)
-  const [updateState, setUpdateState] = useState(-1)
 
-//add new task
+
+  //add new task
   const add = (event) => {
     event.preventDefault()
 
@@ -54,8 +57,8 @@ const Home = () => {
     setUpdateState(-1)
   }
 
-//update task
- const handleEdit=(id) =>{
+  //update task
+  const handleEdit = (id) => {
     setUpdateState(id)
   }
 
@@ -86,12 +89,12 @@ const Home = () => {
 
   }
 
-  const update=(event)=>{
+  const update = (event) => {
     event.preventDefault()
-    
+
     const name = event.target.name.value
-    const newTask = task.map((item)=>(
-      item.id === updateState ? {...item, name:name} : item
+    const newTask = task.map((item) => (
+      item.id === updateState ? { ...item, name: name } : item
     ))
 
     setTask(newTask)
@@ -122,6 +125,13 @@ const Home = () => {
         <form onSubmit={add}>
 
           <div className='home-container'>
+
+            <select>
+              <option>Select</option>
+              <option>High</option>
+              <option>Medium</option>
+              <option>Low</option>
+            </select>
             <input type="text" placeholder="Name" value={name} onChange={e => setName(e.target.value)} />
             <button type="submit"><i className='fa fa-plus'></i></button>
           </div>
@@ -146,7 +156,7 @@ const Home = () => {
               <tr>
                 <td>{item.id}</td>
                 <td>{item.name}</td>
-                
+
                 <td>{item.date}</td>
                 <td></td>
                 <td><button className='edit-button' onClick={() => handleEdit(item.id)}><i className='fa fa-edit fa-2x'></i></button></td>
