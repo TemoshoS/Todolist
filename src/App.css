@@ -257,6 +257,19 @@ outline: none;
 }
 
 
+.priority-high {
+  background-color: red;
+}
+
+.priority-medium {
+  background-color: orange;
+}
+
+.priority-low {
+  background-color: green;
+}
+
+
 
 
 

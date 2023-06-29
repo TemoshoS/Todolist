@@ -5,20 +5,23 @@ const Home = () => {
     {
       id: 1,
       name: "Researching",
-      date: "5/5/2023"
+      date: "5/5/2023",
+      priority: "Low"
 
     },
     {
       id: 2,
       name: "Coding",
-      date: "1/15/2022"
+      date: "1/15/2022",
+      priority: "Medium"
 
     }
     ,
     {
       id: 3,
       name: "Research research",
-      date: "7/30/2002"
+      date: "7/30/2002",
+      priority: "High"
 
     }
   ]
@@ -32,7 +35,7 @@ const Home = () => {
   const [updateState, setUpdateState] = useState(-1)
 
 
-  
+
   useEffect(() => {
     const info = localStorage.getItem('Name');
     const parsedInfo = JSON.parse(info);
@@ -49,7 +52,7 @@ const Home = () => {
 
     const id = counter + 1;
     const date = new Date().toLocaleDateString();
-    const newTask = { id, name: name, date };
+    const newTask = { id, name: name, date, priority: priority };
     const updateTask = [...task, newTask];
 
     setCounter(counter + 1)
@@ -126,13 +129,14 @@ const Home = () => {
 
           <div className='home-container'>
 
-            <select>
+            <select value={priority} onChange={e => setPriority(e.target.value)}>
               <option>Select</option>
-              <option>High</option>
-              <option>Medium</option>
-              <option>Low</option>
+              <option value='high' >High</option>
+              <option value='medium'>Medium</option>
+              <option value='low'>Low</option>
             </select>
-            <input type="text" placeholder="Name" value={name} onChange={e => setName(e.target.value)} />
+
+            <input required type="text" placeholder="Name" value={name} onChange={e => setName(e.target.value)} />
             <button type="submit"><i className='fa fa-plus'></i></button>
           </div>
         </form>
@@ -156,9 +160,8 @@ const Home = () => {
               <tr>
                 <td>{item.id}</td>
                 <td>{item.name}</td>
-
                 <td>{item.date}</td>
-                <td></td>
+                <td>{item.priority}</td>
                 <td><button className='edit-button' onClick={() => handleEdit(item.id)}><i className='fa fa-edit fa-2x'></i></button></td>
                 <td><button onClick={() => handleDelete(item.id)} className='delete-button '><i className='fa fa-trash fa-2x' ></i></button></td>
               </tr>
