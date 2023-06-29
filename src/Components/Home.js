@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 const Home = () => {
 
-  const employes = [
+  const users = [
     {
       id: 1,
       name: "Researching",
@@ -37,59 +37,74 @@ const Home = () => {
 
 
 
-  const [employee, setEmployee] = useState(employes)
+  const [task, setTask] = useState(users)
   const [updateState, setUpdateState] = useState(-1)
 
-
+//add new task
   const add = (event) => {
     event.preventDefault()
 
     const id = counter + 1;
     const date = new Date().toLocaleDateString();
-    const newEmp = { id, name: name, date };
-    const updateEmp = [...employee, newEmp];
+    const newTask = { id, name: name, date };
+    const updateTask = [...task, newTask];
 
     setCounter(counter + 1)
-    setEmployee(updateEmp)
+    setTask(updateTask)
+    setUpdateState(-1)
   }
 
-
-  function handleEdit(id) {
+//update task
+ const handleEdit=(id) =>{
     setUpdateState(id)
-}
+  }
 
-function EditList ({item, employee, setEmployee}){
-  
-  const handleUpdate = (id, newName) => {
-    const updatedEmployee = employee.map((item) => {
-      if (item.id === id) {
-        return { ...item, name: newName};
-      }
-      return item;
-      
-    })
-  
-    setEmployee(updatedEmployee);
+  function EditList({ item, task, setTask }) {
+
+    const handleUpdate = (id, newName) => {
+      const updatedtask = task.map((item) => {
+        if (item.id === id) {
+          return { ...item, name: newName };
+        }
+        return item;
+
+      })
+
+      setTask(updatedtask);
+
+    }
+    return (
+      <tr>
+        <td >{item.id}</td>
+        <td> <input type="text" value={item.name} onChange={(e) => handleUpdate(item.id, e.target.value)} /></td>
+        <td >{item.date}</td>
+        <td><button onClick={update} className='edit-button'>update</button></td>
+
+      </tr>
+    )
+
+
+  }
+
+  const update=(event)=>{
+    event.preventDefault()
     
+    const name = event.target.name.value
+    const newTask = task.map((item)=>(
+      item.id === updateState ? {...item, name:name} : item
+    ))
+
+    setTask(newTask)
+    setUpdateState(-1)
   }
-  return(
-    <tr>
-     <td ><input value={item.id} style={{border:'none'}}/></td>
 
-     <td> <input type="text" value={item.name} onChange={(e) => handleUpdate(item.id, e.target.value)} style={{width:25}}/>
-    </td> 
-    </tr>
-  )
-
-
-}
-
+  //delete task
   const handleDelete = (id) => {
-    const newEmployee = employee.filter((empid) => empid.id !== id)
-    setEmployee(newEmployee)
+    const newtask = task.filter((taskid) => taskid.id !== id)
+    setTask(newtask)
   }
 
- 
+
 
 
 
@@ -105,7 +120,7 @@ function EditList ({item, employee, setEmployee}){
         <h1 style={{ color: 'white' }}>{data} Todo List</h1>
 
         <form onSubmit={add}>
-          
+
           <div className='home-container'>
             <input type="text" placeholder="Name" value={name} onChange={e => setName(e.target.value)} />
             <button type="submit"><i className='fa fa-plus'></i></button>
@@ -119,28 +134,30 @@ function EditList ({item, employee, setEmployee}){
             <th>Task Id</th>
             <th>Task Name</th>
             <th>Date</th>
+            <th>Priority</th>
             <th>Edit</th>
             <th>Delete</th>
           </tr>
-          {employee.filter((item) => {
+          {task.filter((item) => {
             return search.toLowerCase === '' ? item : item.name.toLowerCase().includes(search.toLowerCase())
           }).map((item) => (
-            updateState === item.id ? <EditList item={item} employee={employee} setEmployee={setEmployee}/> :
+            updateState === item.id ? <EditList item={item} task={task} setTask={setTask} /> :
 
-            <tr>
-              <td>{item.id}</td>
-              <td>{item.name}</td>
-              <td>{item.date}</td>
-
-              <td><button className='edit' onClick={() => handleEdit(item.id)}>Edit</button></td>
-              <td><button onClick={() => handleDelete(item.id)} className='delete-button '>Delete</button></td>
-            </tr>
+              <tr>
+                <td>{item.id}</td>
+                <td>{item.name}</td>
+                
+                <td>{item.date}</td>
+                <td></td>
+                <td><button className='edit-button' onClick={() => handleEdit(item.id)}><i className='fa fa-edit fa-2x'></i></button></td>
+                <td><button onClick={() => handleDelete(item.id)} className='delete-button '><i className='fa fa-trash fa-2x' ></i></button></td>
+              </tr>
           ))}
 
 
         </table>
 
-        
+
 
       </div>
 
