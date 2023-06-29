@@ -184,15 +184,67 @@ margin-bottom: 50px;
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: center;
-  background-color:skyblue;
+  background-color:rgb(168, 197, 207);
   color:white;
   
 }
 
 
-.input-container{
+.home-container{
 
-  display:inline;
+  display:block;
+}
+.home-container input {
+  border: none;
+  padding: 5px;
+  border-radius: 4px;
+  margin-right: 2px;
+  margin-bottom: 10px;
+  
+}
+
+.home-container input:focus {
+     border: none;
+     outline: none;
+
+}
+
+.home-container button{
+  border-radius: 4px;
+  font-weight: bold;
+  border: none;
+  padding: 5px 9px;
+  cursor:pointer;
+  background-color:rgb(168, 197, 207);
+  color: white;
+}
+
+
+.search {
+  border-radius: 4px;
+  outline: none;
+  border: none;
+  margin-bottom: 9px;
+  padding: 5px;
+}
+.delete-button {
+
+  background-image: radial-gradient(93% 87% at 87% 89%, rgba(253, 5, 5, 0.23) 0%, transparent 86.18%), radial-gradient(66% 87% at 26% 20%, rgba(255, 3, 3, 0.41) 0%, rgba(185, 48, 48, 0) 69.79%, rgba(243, 8, 8, 0) 100%);
+  border: none;
+  border-radius: 10px;
+  padding: 5px 10px;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+.edit-button {
+
+  background-image: radial-gradient(93% 87% at 87% 89%, rgba(5, 253, 232, 0.23) 0%, transparent 86.18%), radial-gradient(66% 87% at 26% 20%, rgba(3, 255, 255, 0.41) 0%, rgba(185, 48, 48, 0) 69.79%, rgba(243, 8, 8, 0) 100%);
+  border: none;
+  font-size: 11px;
+  font-weight: bold;
+  border-radius: 10px;
+  padding: 5px 15px;
 }
 
 
