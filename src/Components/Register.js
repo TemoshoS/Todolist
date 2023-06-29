@@ -24,6 +24,7 @@ const Register = () => {
             setFlag(false)
             localStorage.setItem("Email", JSON.stringify(email))
             localStorage.setItem("Password", JSON.stringify(password))
+            localStorage.setItem("Name", JSON.stringify(name))
             setLogin(!login)
 
         }
