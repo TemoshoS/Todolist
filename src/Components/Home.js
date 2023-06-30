@@ -57,20 +57,24 @@ const Home = () => {
     event.preventDefault()
 
     if (name && priority) {
-      let color = '';
+      
+      let backgroundColor = '';
       if (priority === 'High') {
-        color = 'red';
+        
+        backgroundColor = 'red';
       } else if (priority === 'Medium') {
-        color = 'yellow';
+       
+        backgroundColor = 'yellow';
       } else if (priority === 'Low') {
-        color = 'green';
+        
+        backgroundColor = 'green';
         
       }
 
     
     const id = counter + 1;
     const date = new Date().toLocaleDateString();
-    const newTask = { id, name: name, date, priority: priority,color: color  };
+    const newTask = { id, name: name, date, priority: priority,backgroundColor:backgroundColor};
     const updateTask = [...task, newTask];
     
 
@@ -179,9 +183,9 @@ const Home = () => {
 
               <tr>
                 <td>{item.id}</td>
-                <td style={{ color: item.color }}>{item.name}</td>
+                <td >{item.name}</td>
                 <td>{item.date}</td>
-                <td>{item.priority}</td>
+                <td style={{  backgroundColor: item.backgroundColor }}>{item.priority}</td>
                 <td><button className='edit-button' onClick={() => handleEdit(item.id)}><i className='fa fa-edit fa-2x'></i></button></td>
                 <td><button onClick={() => handleDelete(item.id)} className='delete-button '><i className='fa fa-trash fa-2x' ></i></button></td>
               </tr>
