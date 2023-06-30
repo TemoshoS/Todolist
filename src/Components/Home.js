@@ -59,14 +59,21 @@ const Home = () => {
     if (name && priority) {
       
       let backgroundColor = '';
+      
+      let borderRadius ='';
       if (priority === 'High') {
-        
+
+        borderRadius ='30px';
         backgroundColor = 'red';
+        
       } else if (priority === 'Medium') {
-       
+
+        borderRadius ='30px';
         backgroundColor = 'yellow';
+
       } else if (priority === 'Low') {
         
+        borderRadius ='30px';
         backgroundColor = 'green';
         
       }
@@ -74,7 +81,7 @@ const Home = () => {
     
     const id = counter + 1;
     const date = new Date().toLocaleDateString();
-    const newTask = { id, name: name, date, priority: priority,backgroundColor:backgroundColor};
+    const newTask = { id, name: name, date, priority: priority,backgroundColor:backgroundColor, borderRadius:borderRadius};
     const updateTask = [...task, newTask];
     
 
@@ -153,7 +160,7 @@ const Home = () => {
 
           <div className='home-container'>
 
-            <select value={priority} onChange={e => setPriority(e.target.value)}>
+            <select value={priority} onChange={e => setPriority(e.target.value)} required>
               <option>Select</option>
               <option value='High' >High</option>
               <option value='Medium'>Medium</option>
@@ -185,7 +192,7 @@ const Home = () => {
                 <td>{item.id}</td>
                 <td >{item.name}</td>
                 <td>{item.date}</td>
-                <td style={{  backgroundColor: item.backgroundColor }}>{item.priority}</td>
+                <td style={{  backgroundColor: item.backgroundColor, borderRadius: item.borderRadius }}>{item.priority}</td>
                 <td><button className='edit-button' onClick={() => handleEdit(item.id)}><i className='fa fa-edit fa-2x'></i></button></td>
                 <td><button onClick={() => handleDelete(item.id)} className='delete-button '><i className='fa fa-trash fa-2x' ></i></button></td>
               </tr>
