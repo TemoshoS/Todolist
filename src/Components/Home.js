@@ -33,6 +33,7 @@ const Home = () => {
   const [data, setData] = useState([]);
   const [task, setTask] = useState(users)
   const [updateState, setUpdateState] = useState(-1)
+  const [editItemId, setEditItemId] = useState(null);
   
 
 
@@ -92,48 +93,28 @@ const Home = () => {
   }
 
   //update task
-  const handleEdit = (id) => {
+ 
+  const handleEdit =(id)=>{
     setUpdateState(id)
-  }
-
-  function EditList({ item, task, setTask }) {
-
-    const handleUpdate = (id, newName) => {
-      const updatedtask = task.map((item) => {
-        if (item.id === id) {
-          return { ...item, name: newName };
-        }
-        return item;
-
-      })
-
-      setTask(updatedtask);
-
-    }
-    return (
-      <tr>
-        <td >{item.id}</td>
-        <td> <input type="text" value={item.name} onChange={(e) => handleUpdate(item.id, e.target.value)} /></td>
-        <td >{item.date}</td>
-        <td><button onClick={update} className='edit-button'>update</button></td>
-
-      </tr>
-    )
-
+    setEditItemId(id)
 
   }
 
-  const update = (event) => {
-    event.preventDefault()
+  const handleUpdate =(id, newName)=>{
+    const updateTask = task.map((item)=>{
+      if(item.id===id){
+        return {...item, name: newName}
+      }
+      return item
+    })
 
-    const name = event.target.name.value
-    const newTask = task.map((item) => (
-      item.id === updateState ? { ...item, name: name } : item
-    ))
-
-    setTask(newTask)
+    setTask(updateTask)
     setUpdateState(-1)
+    setEditItemId(null)
+
   }
+
+  
 
   //delete task
   const handleDelete = (id) => {
@@ -186,17 +167,27 @@ const Home = () => {
           {task.filter((item) => {
             return search.toLowerCase === '' ? item : item.name.toLowerCase().includes(search.toLowerCase())
           }).map((item) => (
-            updateState === item.id ? <EditList item={item} task={task} setTask={setTask} /> :
+            
 
               <tr>
                 <td>{item.id}</td>
                 <td >{item.name}</td>
                 <td>{item.date}</td>
                 <td style={{  backgroundColor: item.backgroundColor, borderRadius: item.borderRadius }}>{item.priority}</td>
-                <td><button className='edit-button' onClick={() => handleEdit(item.id)}><i className='fa fa-edit fa-2x'></i></button></td>
+                {editItemId === item.id ? (
+                  <td>
+                    <button onClick={() => handleUpdate(item.id, name)} className='edit-button'>Update</button>
+                    
+                  </td>
+                ) : (
+                  <td>
+                    <button onClick={() => handleEdit(item.id)} className='edit-button'><i className='fa fa-edit fa-2x'></i></button>
+                  </td>
+                )}
                 <td><button onClick={() => handleDelete(item.id)} className='delete-button '><i className='fa fa-trash fa-2x' ></i></button></td>
               </tr>
-          ))}
+          ))
+     }
 
 
         </table>
