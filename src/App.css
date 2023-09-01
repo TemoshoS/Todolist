@@ -228,6 +228,12 @@ outline: none;
 
 }
 
+.editable{
+
+  border: 2px solid red;
+  padding: 5px;
+}
+
 
 .search {
   border-radius: 4px;
